@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 class PacientesSerializer(serializers.ModelSerializer):
-    def validate_nombre(self, value):
+    def validar_nombre(self, value):
         if len(value) < 3:
             raise serializers.ValidationError("El nombre debe tener al menos 3 caracteres.")
         return value
 
-    def validate_email(self, value):
+    def validar_email(self, value):
         if not value:
             raise serializers.ValidationError("El correo electrónico es obligatorio.")
         return value
@@ -17,7 +17,7 @@ class PacientesSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DoctoresSerializer(serializers.ModelSerializer):
-    def validate_nombre(self, value):
+    def validar_nombre(self, value):
         if len(value) < 3:
             raise serializers.ValidationError("El nombre del doctor debe tener al menos 3 caracteres.")
         return value
@@ -27,7 +27,7 @@ class DoctoresSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EspecialidadesSerializer(serializers.ModelSerializer):
-    def validate_nombre(self, value):
+    def validar_nombre(self, value):
         if len(value) < 3:
             raise serializers.ValidationError("El nombre de la especialidad debe tener al menos 3 caracteres.")
         return value
@@ -37,7 +37,7 @@ class EspecialidadesSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CitasSerializer(serializers.ModelSerializer):
-    def validate_motivo(self, value):
+    def validar_motivo(self, value):
         if len(value) < 10:
             raise serializers.ValidationError("El motivo debe contener al menos 10 caracteres.")
         return value
