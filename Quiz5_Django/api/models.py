@@ -11,7 +11,7 @@ class Pacientes(models.Model):
     telefono_paciente = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido1} {self.apellido2}"
+        return f"{self.nombre_paciente} {self.apellido1_paciente} {self.apellido2_paciente} - {self.edad_paciente} años"
 
 class Doctores(models.Model):
     nombre_doctor = models.CharField(max_length=50, validators=[MinLengthValidator(3)])
@@ -22,13 +22,13 @@ class Doctores(models.Model):
     especialidad = models.ManyToManyField('Especialidades', through='Doctores_Especialidades')
     
     def __str__(self):
-        return f"{self.nombre} ({self.anos_experiencia} años de experiencia)"
+        return f"{self.nombre_doctor} - {self.anos_experiencia} años de experiencia"
 
 class Especialidades(models.Model):
     nombre_especialidad = models.CharField(max_length=100, unique=True, validators=[MinLengthValidator(3)])
 
     def __str__(self):
-        return self.nombre
+        return self.nombre_especialidad
 
 class Citas(models.Model):
     paciente = models.ForeignKey(Pacientes, on_delete=models.CASCADE)
@@ -38,8 +38,8 @@ class Citas(models.Model):
     motivo = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Cita con {self.doctor} el {self.fecha} a las {self.hora}"
-
+        return f"Cita de {self.paciente} con {self.doctor} el {self.fecha} a las {self.hora}"
+    
 # Modelo de relación entre Doctores y Especialidades
 class Doctores_Especialidades(models.Model):
     doctor = models.ForeignKey(Doctores, on_delete=models.CASCADE)
